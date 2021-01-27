@@ -2,6 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 
 const getColorClass = function(type:string){
   switch (type) {
+    case 'fire':
+      return "card--color--fire"
+    case 'normal':
+      return "card--color--normal"
+
     case 'water':
       return "card--color--water"
 
@@ -57,14 +62,18 @@ const getColorClass = function(type:string){
 export class CardComponent implements OnInit {
   @Input() name:string;
   @Input() number:string;
-  @Input() types:[string,string] = ["grass", "poison"];
+  @Input() types:string[];
   @Input() image:string;
-
-  colorClass = getColorClass(this.types[0].toLowerCase());
 
   constructor() { }
 
+  public colorClass = '';
+
   ngOnInit(): void {
+    if(this.types.length > 0){
+        this.colorClass = getColorClass(this.types[0].toLowerCase());
+    }
+
   }
 
 }
